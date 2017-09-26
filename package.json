@@ -1,0 +1,92 @@
+{
+    "name": "roku-deploy-vscode",
+    "displayName": "Roku Deploy",
+    "description": "Simple extension for deploying a channel to a Roku",
+    "version": "0.0.1",
+    "publisher": "mjmcaulay",
+    "engines": {
+        "vscode": "^1.16.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:roku-deploy.deploy"
+    ],
+    "main": "./out/src/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "roku-deploy.deploy",
+                "title": "Roku Deploy"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "Roku Deploy",
+            "properties": {
+                "roku-deploy.rokuAddress": {
+                    "type": "string",
+                    "default": "192.168.1.1",
+                    "description": "The address of the Roku you want to deploy to.",
+                    "scope": "window"
+                },
+                "roku-deploy.rokuUserId": {
+                    "type": "string",
+                    "default": "rokudev",
+                    "description": "user id for connecting to Roku box.",
+                    "scope": "window"
+                },
+                "roku-deploy.rokuPassword": {
+                    "type": "string",
+                    "default": "1111",
+                    "description": "Password for connecting to the Roku box.",
+                    "scope": "window"
+                },
+                "roku-deploy.outputDirectory": {
+                    "type": "string",
+                    "default": "out",
+                    "description": "Directory where package will be saved.",
+                    "scope": "window"
+                },
+                "roku-deploy.excludedPaths": {
+                    "type": "string",
+                    "default": "out",
+                    "description": "Paths to exclude from the package.",
+                    "scope": "window"
+                },
+                "roku-deploy.srcDirectory": {
+                    "type": "string",
+                    "default": "src",
+                    "description": "Path to folder that will act as the package content root.",
+                    "scope": "window"
+                }
+            }
+        }
+    },
+    "keywords": [
+        "Roku",
+        "Deploy",
+        "Brightscript"
+    ],
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run compile && node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "@types/mocha": "^2.2.42",
+        "@types/node": "^7.0.43",
+        "archiver": "^0.21.0",
+        "mocha": "^3.5.0",
+        "request": "^2.69.0",
+        "typescript": "^2.5.2",
+        "vscode": "^1.1.5"
+    },
+    "dependencies": {
+        "request": "^2.69.0",
+        "archiver": "^0.21.0"
+    }
+}
