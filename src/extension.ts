@@ -40,6 +40,10 @@ export function activate(context: vscode.ExtensionContext) {
         configSettings = new Settings();
     }
 
+    function runUnitTest(){
+        request.post('http://' + configSettings.rokuAddress + ':8060/launch/dev?RunTests=true');
+    }
+
     function deployRoku() {
         return zipPackage();
     }
@@ -175,8 +179,13 @@ export function activate(context: vscode.ExtensionContext) {
         // Display a message box to the user
         vscode.window.showInformationMessage('Deploy started.');
     });
+    let unitTest = vscode.commands.registerCommand('roku-deploy.unittest', () => {
+        runUnitTest();
+        vscode.window.showInformationMessage('Unit tests initiated.');
+    });
 
     context.subscriptions.push(disposable);
+    context.subscriptions.push(unitTest);
 }
 
 // this method is called when your extension is deactivated

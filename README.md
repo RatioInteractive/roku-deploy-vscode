@@ -23,3 +23,9 @@ Attempting to redeploy the same package will result in a failed deploy. Still wo
 First release
 
 ### 0.0.1
+Initial release
+### 0.0.2
+Added default key binding ctrl+alt+shift+d
+
+### 0.0.3
+Added unit test running default binding ctrl+alt+shift+t

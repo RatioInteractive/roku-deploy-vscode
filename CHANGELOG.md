@@ -7,4 +7,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Initial release
 
 ## Released
-Added default key binding ctl+alt+shift+d
+0.0.2
+Added default key binding ctrl+alt+shift+d
+
+0.0.3
+Added unit test running default binding ctrl+alt+shift+t
