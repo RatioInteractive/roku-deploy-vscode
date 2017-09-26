@@ -2,7 +2,7 @@
     "name": "roku-deploy-vscode",
     "displayName": "Roku Deploy",
     "description": "Simple extension for deploying a channel to a Roku",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "mjmcaulay",
     "engines": {
         "vscode": "^1.16.0"
@@ -62,7 +62,13 @@
                     "scope": "window"
                 }
             }
-        }
+        },
+        "keybindings" :[
+            {
+                "command": "roku-deploy.deploy",
+                "key": "ctrl+alt+shift+d"
+            }
+        ]
     },
     "keywords": [
         "Roku",
