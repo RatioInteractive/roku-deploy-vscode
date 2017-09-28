@@ -2,7 +2,7 @@
     "name": "roku-deploy-vscode",
     "displayName": "Roku Deploy",
     "description": "Simple extension for deploying a channel to a Roku",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "publisher": "mjmcaulay",
     "engines": {
         "vscode": "^1.16.0"
@@ -12,7 +12,8 @@
     ],
     "activationEvents": [
         "onCommand:roku-deploy.deploy",
-        "onCommand:roku-deploy.unittest"
+        "onCommand:roku-deploy.unittest",
+        "onCommand:roku-deploy.proxyLaunch"
     ],
     "main": "./out/src/extension",
     "contributes": {
@@ -24,6 +25,10 @@
             {
                 "command": "roku-deploy.unittest",
                 "title": "Roku Test"
+            },
+            {
+                "command": "roku-deploy.proxyLaunch",
+                "title": "Roku Launch with proxy"
             }
         ],
         "configuration": {
@@ -65,6 +70,12 @@
                     "default": "src",
                     "description": "Path to folder that will act as the package content root.",
                     "scope": "window"
+                },
+                "roku-deploy.proxyAddress": {
+                    "type": "string",
+                    "default": "192.168.1.1:8888",
+                    "description": "ip address and port for routing calls through a proxy. Requires handling requests within the app to support proxying.",
+                    "scope": "window"
                 }
             }
         },
@@ -76,6 +87,10 @@
             {
                 "command": "roku-deploy.unittest",
                 "key": "ctrl+alt+shift+t"
+            },
+            {
+                "command": "roku-deploy.proxyLaunch",
+                "key": "ctrl+alt+shift+p"
             }
         ]
     },

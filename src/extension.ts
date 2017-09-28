@@ -14,13 +14,15 @@ class Settings {
     excludedPaths : string;
     srcDirectory : string;
     separator : string;
+    proxyAddress : string;
     constructor() {
         this.rokuAddress = vscode.workspace.getConfiguration('roku-deploy').get('rokuAddress');
         this.rokuUserId = vscode.workspace.getConfiguration('roku-deploy').get('rokuUserId');
         this.rokuPassword = vscode.workspace.getConfiguration('roku-deploy').get('rokuPassword');
         this.outputDirectory = vscode.workspace.getConfiguration('roku-deploy').get('outputDirectory');
         this.excludedPaths = vscode.workspace.getConfiguration('roku-deploy').get('excludedPaths');
-        this.srcDirectory = vscode.workspace.getConfiguration('roku-deploy').get('srcDirectory');        
+        this.srcDirectory = vscode.workspace.getConfiguration('roku-deploy').get('srcDirectory');
+        this.proxyAddress = vscode.workspace.getConfiguration('roku-deploy').get('proxyAddress');
         this.separator = process.platform !== 'win32' ? '/' : '\\';
     }
     
@@ -42,6 +44,11 @@ export function activate(context: vscode.ExtensionContext) {
 
     function runUnitTest(){
         request.post('http://' + configSettings.rokuAddress + ':8060/launch/dev?RunTests=true');
+    }
+
+    function runProxyLaunch(){
+      
+      request.post('http://' + configSettings.rokuAddress + ':8060/launch/dev?proxy=' + encodeURIComponent(configSettings.proxyAddress));
     }
 
     function deployRoku() {
@@ -176,16 +183,19 @@ export function activate(context: vscode.ExtensionContext) {
     let disposable = vscode.commands.registerCommand('roku-deploy.deploy', () => {
         // The code you place here will be executed every time your command is executed
         deployRoku();
-        // Display a message box to the user
-        vscode.window.showInformationMessage('Deploy started.');
     });
     let unitTest = vscode.commands.registerCommand('roku-deploy.unittest', () => {
         runUnitTest();
         vscode.window.showInformationMessage('Unit tests initiated.');
     });
+    let proxyLaunch = vscode.commands.registerCommand('roku-deploy.proxyLaunch', () =>{
+      runProxyLaunch();
+      vscode.window.showInformationMessage('Roku launched with proxy address: ' + configSettings.proxyAddress);
+    });
 
     context.subscriptions.push(disposable);
     context.subscriptions.push(unitTest);
+    context.subscriptions.push(proxyLaunch);
 }
 
 // this method is called when your extension is deactivated

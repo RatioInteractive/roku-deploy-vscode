@@ -12,3 +12,6 @@ Added default key binding ctrl+alt+shift+d
 
 0.0.3
 Added unit test running default binding ctrl+alt+shift+t
+
+0.0.4
+Added launch with proxy default binding ctrl_alt_shift+p NOTE: this requires code within the project to support proxying.
